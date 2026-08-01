@@ -1,0 +1,6 @@
+{
+  "name": "RETAILCOUNT",
+  "description": "Enterprise AI for high-performance retail operations. Precision monitoring, zone performance, flow friction analysis, and live edge-AI camera intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
