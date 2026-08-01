@@ -642,7 +642,7 @@ export const SettingsView: React.FC = () => {
                 <div className="space-y-1.5">
                   <label className="text-[10px] text-[#6B7280] font-extrabold uppercase">Member Since</label>
                   <div className="w-full bg-[#e0e3e5]/50 border border-[#E5E7EB] px-4 py-3 rounded-xl font-bold text-[#575e70]">
-                    January 12, 2024
+                    January 12, 2026
                   </div>
                 </div>
               </div>

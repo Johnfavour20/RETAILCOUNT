@@ -930,7 +930,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
 
           {/* Footer Print */}
           <footer className="w-full max-w-md pt-8 flex justify-between items-center text-[#777684] text-[11px] border-t border-[#E5E7EB]">
-            <span>© 2024 RETAILCOUNT</span>
+            <span>© {new Date().getFullYear()} RETAILCOUNT</span>
             <div className="flex gap-4 font-medium">
               <a href="#" className="hover:text-[#4040a5]">
                 Privacy Policy

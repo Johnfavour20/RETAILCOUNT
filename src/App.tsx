@@ -25,7 +25,7 @@ import { UsersView } from './components/dashboard/UsersView';
 import { SettingsView } from './components/dashboard/SettingsView';
 
 export function App() {
-  const [viewMode, setViewMode] = useState<'landing' | 'app'>('app');
+  const [viewMode, setViewMode] = useState<'landing' | 'app'>('landing');
   const [activeNavPage, setActiveNavPage] = useState<NavItemId>('dashboard');
 
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
@@ -43,7 +43,8 @@ export function App() {
         setIsAuthOpen(false);
         setViewMode('app');
         setActiveNavPage(hash as NavItemId);
-      } else if (hash === 'landing') {
+      } else {
+        setIsAuthOpen(false);
         setViewMode('landing');
       }
     };
