@@ -175,18 +175,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
 
   return (
     <div className="bg-[#f7f9fb] text-[#191c1e] min-h-screen font-sans antialiased w-full relative">
-      {/* Optional Top Exit Button */}
-      {onClose && (
-        <div className="absolute top-6 right-6 z-40">
-          <button
-            onClick={onClose}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/90 hover:bg-white text-[#28268d] border border-[#E5E7EB] shadow-md backdrop-blur-md text-xs font-bold transition-all hover:scale-105 cursor-pointer"
-          >
-            <span className="material-symbols-outlined text-[18px]">close</span>
-            Exit Demo
-          </button>
-        </div>
-      )}
+      {/* Optional Top Exit Button Removed */}
 
       <main className="flex min-h-screen w-full">
         {/* ================= LEFT PANEL: AUTHENTICATION FORM (40% Desktop) ================= */}

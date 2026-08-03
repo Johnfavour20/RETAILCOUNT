@@ -32,7 +32,7 @@ import {
   ChevronRight,
   Flame,
   Activity,
-  Zap,
+  Film,
   CheckSquare,
   Square
 } from 'lucide-react';
@@ -156,46 +156,17 @@ export const VideoAnalysisView: React.FC = () => {
     };
   }, [isPlaying]);
 
+  const hasCompletedRef = useRef(false);
+
   // Processing progress simulation
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
     if (isProcessing) {
+      hasCompletedRef.current = false;
       interval = setInterval(() => {
         setProgress((prev) => {
           const next = prev + 1.5;
-          if (next >= 100) {
-            setIsProcessing(false);
-            setActiveStep(4);
-            // Add new completed job to list
-            const newJob: AnalysisJob = {
-              id: `job-${Date.now()}`,
-              filename: selectedFile?.name || 'CCTV_Camera_Feed_01.mp4',
-              storeName: targetStore.split(' (')[0],
-              date: 'Just Now',
-              duration: '10:00 min',
-              status: 'COMPLETED',
-              peopleCount: 894,
-              peakOccupancy: 64,
-              avgOccupancy: 28.5,
-              longestQueue: '03:45',
-              queueEventsCount: 8,
-              congestionEventsCount: 2,
-              confidenceScore: 97.4,
-            };
-            setRecentJobs((prevJobs) => [newJob, ...prevJobs]);
-            setActiveReportId(newJob.id);
-            showToast('AI Video Analysis completed successfully! Report generated below.');
-            return 100;
-          }
-
-          // Step milestones
-          if (next > 75) setActiveStep(3);
-          else if (next > 45) setActiveStep(2);
-          else if (next > 20) setActiveStep(1);
-          else setActiveStep(0);
-
-          setEstimatedSeconds((prevSec) => Math.max(0, Math.floor((100 - next) * 1.5)));
-
+          if (next >= 100) return 100;
           return next;
         });
       }, 300);
@@ -203,7 +174,46 @@ export const VideoAnalysisView: React.FC = () => {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isProcessing, selectedFile, targetStore]);
+  }, [isProcessing]);
+
+  // Handle step updates & completion when progress changes
+  useEffect(() => {
+    if (!isProcessing) return;
+
+    if (progress >= 100) {
+      if (!hasCompletedRef.current) {
+        hasCompletedRef.current = true;
+        setIsProcessing(false);
+        setActiveStep(4);
+        const uniqueId = `job-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+        const newJob: AnalysisJob = {
+          id: uniqueId,
+          filename: selectedFile?.name || 'CCTV_Camera_Feed_01.mp4',
+          storeName: targetStore.split(' (')[0],
+          date: 'Just Now',
+          duration: '10:00 min',
+          status: 'COMPLETED',
+          peopleCount: 894,
+          peakOccupancy: 64,
+          avgOccupancy: 28.5,
+          longestQueue: '03:45',
+          queueEventsCount: 8,
+          congestionEventsCount: 2,
+          confidenceScore: 97.4,
+        };
+        setRecentJobs((prevJobs) => [newJob, ...prevJobs]);
+        setActiveReportId(uniqueId);
+        showToast('AI Video Analysis completed successfully! Report generated below.');
+      }
+    } else {
+      if (progress > 75) setActiveStep(3);
+      else if (progress > 45) setActiveStep(2);
+      else if (progress > 20) setActiveStep(1);
+      else setActiveStep(0);
+
+      setEstimatedSeconds(Math.max(0, Math.floor((100 - progress) * 1.5)));
+    }
+  }, [progress, isProcessing, selectedFile, targetStore]);
 
   // Drag and drop handlers
   const handleDragOver = (e: React.DragEvent) => {
@@ -339,7 +349,7 @@ export const VideoAnalysisView: React.FC = () => {
             }}
             className="px-4 py-2.5 rounded-xl border border-[#E5E7EB] bg-white text-[#28268d] hover:bg-[#f7f9fb] font-bold text-xs transition-all cursor-pointer shadow-2xs flex items-center gap-2"
           >
-            <Zap className="w-4 h-4 text-[#28268d]" /> Load Sample Footage
+            <Film className="w-4 h-4 text-[#28268d]" /> Load Sample Footage
           </button>
         </div>
       </header>
