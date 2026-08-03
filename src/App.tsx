@@ -17,6 +17,7 @@ import { AuthMode } from './components/AuthPage';
 import { AppShell, NavItemId } from './components/AppShell';
 import { DashboardView } from './components/dashboard/DashboardView';
 import { LiveMonitoringView } from './components/dashboard/LiveMonitoringView';
+import { VideoAnalysisView } from './components/dashboard/VideoAnalysisView';
 import { AnalyticsView } from './components/dashboard/AnalyticsView';
 import { ReportsView } from './components/dashboard/ReportsView';
 import { StoresView } from './components/dashboard/StoresView';
@@ -39,7 +40,7 @@ export function App() {
       if (['login', 'register', 'registration-success', 'forgot-password', 'check-email', 'reset-password', 'reset-success'].includes(hash)) {
         setAuthMode(hash as AuthMode);
         setIsAuthOpen(true);
-      } else if (['dashboard', 'live-monitoring', 'analytics', 'reports', 'stores', 'alerts', 'users', 'settings'].includes(hash)) {
+      } else if (['dashboard', 'live-monitoring', 'video-analysis', 'analytics', 'reports', 'stores', 'alerts', 'users', 'settings'].includes(hash)) {
         setIsAuthOpen(false);
         setViewMode('app');
         setActiveNavPage(hash as NavItemId);
@@ -82,6 +83,8 @@ export function App() {
         return <DashboardView onNavigate={handleNavigate} />;
       case 'live-monitoring':
         return <LiveMonitoringView />;
+      case 'video-analysis':
+        return <VideoAnalysisView />;
       case 'analytics':
         return <AnalyticsView />;
       case 'reports':

@@ -73,6 +73,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate }) => {
 
         <div className="flex items-center gap-3">
           <button
+            onClick={() => onNavigate('video-analysis')}
+            className="px-4 py-2 bg-white border border-[#E5E7EB] hover:bg-[#f7f9fb] text-[#28268d] font-bold rounded-xl text-xs transition-all shadow-2xs flex items-center gap-2 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-[#28268d]" />
+            Video Analysis AI
+          </button>
+          <button
             onClick={() => onNavigate('live-monitoring')}
             className="px-4 py-2 bg-[#28268d] hover:bg-[#4040a5] text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center gap-2 cursor-pointer"
           >

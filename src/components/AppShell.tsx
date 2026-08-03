@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   LayoutDashboard,
   Video,
+  FileVideo,
   TrendingUp,
   FileText,
   Store,
@@ -25,6 +26,7 @@ import {
 export type NavItemId =
   | 'dashboard'
   | 'live-monitoring'
+  | 'video-analysis'
   | 'analytics'
   | 'reports'
   | 'stores'
@@ -55,6 +57,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
       { id: 'live-monitoring', label: 'Live Monitoring', icon: Video, badge: 'LIVE' },
+      { id: 'video-analysis', label: 'Video Analysis', icon: FileVideo, badge: 'AI' },
       { id: 'analytics', label: 'Analytics', icon: TrendingUp },
       { id: 'reports', label: 'Reports', icon: FileText }
     ]
@@ -108,6 +111,8 @@ export const AppShell: React.FC<AppShellProps> = ({
         return 'Executive Dashboard';
       case 'live-monitoring':
         return 'Live Monitoring & Camera Feeds';
+      case 'video-analysis':
+        return 'CCTV Video Analysis & Optical Intelligence';
       case 'analytics':
         return 'Retail Analytics & Spatial Density';
       case 'reports':
